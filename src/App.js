@@ -19,6 +19,13 @@ class App extends Component {
             .then(users => this.setState({monsters: users}));
     }
 
+    onSearchChanged =  event => {
+        this.setState({
+            searchField: event.target.value
+        });
+    }
+
+
     render() {
         const {monsters, searchField} = this.state;
         const filteredMonsters = monsters.filter(monster =>
@@ -26,9 +33,9 @@ class App extends Component {
         );
         return (
             <div className="App">
-                <h1>Monsters Rolodex</h1>
+                <h1>{title}</h1>
                 <SearchBox placeholder='Jetzt suchen!'
-                           handleChange={event => this.setState({searchField: event.target.value})}/>
+                           handleChange={this.onSearchChanged}/>
                 <CardList monsters={filteredMonsters}/>
             </div>
         )
